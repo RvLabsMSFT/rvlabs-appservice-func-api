@@ -16,9 +16,9 @@ export class EzauthEchoApiComponent implements OnInit {
   ngOnInit(): void {
 
     var payload = {
-      fn: "Romer",
-      ln: "Ventura",
-      em: "romer@ventura.com",
+      fn: "Jon",
+      ln: "Doe",
+      em: "jondoe@doe.com",
       pic: "http://someurl.com/pic.svg"
     };
 

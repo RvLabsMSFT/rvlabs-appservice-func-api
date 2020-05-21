@@ -14,12 +14,10 @@ namespace ezauth_echo_api
     {
         [FunctionName("echo_api")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-
-            string name = req.Query["name"];
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
@@ -28,7 +26,7 @@ namespace ezauth_echo_api
             profile.firstName = data.fn;
             profile.lastName = data.ln;
             profile.email = data.em;
-            profile.profilePicUrl = data.pic;
+            profile.profilePicUrl = "http://azure-functions";
 
             return  profile != null
                 ? (ActionResult)new OkObjectResult(profile)
