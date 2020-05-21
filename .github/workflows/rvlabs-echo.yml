@@ -1,0 +1,38 @@
+name: RvLabs-Echo-Function
+
+on:
+  push:
+    paths: 
+      - 'ezauth-echo-api/**'
+
+env:
+  AZURE_FUNCAPP_NAME: rvlabs-echo-api    # set this to your application's name
+  FUNCAPP_PATH: ezauth-echo-api      # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.0.100'                # set this to the node version to use
+  PUBLISH_PATH: publish
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.4.0
+      with:
+        # SDK version to use. Example: 2.2.104
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Publish functions
+      working-directory: ${{ env.FUNCAPP_PATH }}
+      run: dotnet publish --configuration Release --output ${{ env.PUBLISH_PATH }}
+
+    - name: Azure Functions Action
+      uses: Azure/functions-action@v1.1.4
+      with:
+        app-name: ${{ AZURE_FUNCAPP_NAME }}
+        package: ${{ env.PUBLISH_PATH }} # optional, default is .
+        publish-profile: ${{ secrets.RVLABS_ECHO_PUBLISH_PROFILE }} # optional
+
