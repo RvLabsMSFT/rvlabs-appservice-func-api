@@ -30,7 +30,7 @@ namespace ezauth_echo_api
 
             return  profile != null
                 ? (ActionResult)new OkObjectResult(profile)
-                : new BadRequestObjectResult("Please pass some datas request body");
+                : new BadRequestObjectResult("Please pass some df request body");
         }
     }
 
