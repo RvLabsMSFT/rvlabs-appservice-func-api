@@ -33,6 +33,6 @@ jobs:
       uses: Azure/functions-action@v1.1.4
       with:
         app-name: ${{ env.AZURE_FUNCAPP_NAME }}
-        package: ${{ env.PUBLISH_PATH }} # optional, default is .
+        package: ${{ env.FUNCAPP_PATH }}/${{ env.PUBLISH_PATH }} # optional, default is .
         publish-profile: ${{ secrets.RVLABS_ECHO_PUBLISH_PROFILE }} # optional
 
