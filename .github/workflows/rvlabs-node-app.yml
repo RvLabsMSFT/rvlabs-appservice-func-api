@@ -1,4 +1,4 @@
-name:RvLabs-Node-App
+name: RvLabs-Node-App
 
 on:
   push:
