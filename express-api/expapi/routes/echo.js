@@ -11,17 +11,21 @@ const options = {
 
 /* GET users listing. */
 router.get('/echo', function(req, res, next) {
-  res.send('respond with a ECHO API');
+  res.send('TXT ECHO API -- ' + JSON.stringify(req.headers));
 });
 
 router.post('/api/echo_api', (req, res) => {
+  
+  console.log(JSON.stringify(req))
+
   api.post(req.path, req.body, options)
   .then(resp => {
+    console.log(JSON.stringify(resp))
     res.send(resp.data)
   })
-  .catch(resp => {
+  .catch(error => {
     console.log('Error on backend')
-    res.send(resp.data)
+    res.send(JSON.stringify(error))
   })
 })
 
