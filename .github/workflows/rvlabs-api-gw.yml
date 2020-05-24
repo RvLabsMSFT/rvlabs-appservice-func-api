@@ -1,0 +1,38 @@
+name: RvLabs-API
+
+on:
+  push:
+    paths: 
+      - 'coreapi/**'
+
+env:
+  AZURE_WEBAPP_NAME: rvlabs-api-gateway    # set this to your application's name
+  PKG_PATH: ${{ github.workspace }}/output      # set this to the path to your web app project, defaults to the repository root
+  WORK_PATH: 'coreapi'
+  DOTNET_VERSION: '3.1.300' 
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.4.0
+      with:
+        # SDK version to use. Example: 2.2.104
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Publish functions
+      working-directory: ${{ env.WORK_PATH }}
+      run: dotnet publish --configuration Release --output ${{ env.PKG_PATH }}
+
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.RVLABS_API_GATEWAY }}
+        package: ${{ env.PKG_PATH }}
