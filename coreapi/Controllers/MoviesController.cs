@@ -16,22 +16,22 @@ namespace coreapi.Controllers
     {
         private readonly ILogger<MoviesController> _logger;
         private readonly IConfiguration _config;
+        private readonly HttpClient _httpClient;
 
         public MoviesController(ILogger<MoviesController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _config = configuration;
+            _httpClient = new HttpClient {
+                BaseAddress = new Uri(_config["FUNC_ENDPOINT"])
+            };
 
             FUNC_KEY = _config["SUBSCRIPTION_KEY"];
+            FUNC_ENDPOINT = _config["FUNC_ENDPOINT"];
         }
 
-        private static string FUNC_ENDPOINT = "https://rvlabs-api.azurewebsites.net/"; //Environment.GetEnvironmentVariable("CATEGORIES_ENDPOINT");
+        private static string FUNC_ENDPOINT;
         private static string FUNC_KEY;
-
-        private static readonly HttpClient httpClient = new HttpClient()
-        {
-            BaseAddress = new Uri(FUNC_ENDPOINT)
-        };
 
         public List<MovieItem> ReadMoviesDataSet()
         {
@@ -76,8 +76,8 @@ namespace coreapi.Controllers
         [HttpGet("/api/func")]
         public async Task<IActionResult> GetCategories()
         {
-            httpClient.DefaultRequestHeaders.Add("x-functions-key", FUNC_KEY);
-            HttpResponseMessage response = await httpClient.GetAsync("api/movies/categories");
+            _httpClient.DefaultRequestHeaders.Add("x-functions-key", FUNC_KEY);
+            HttpResponseMessage response = await _httpClient.GetAsync("api/movies/categories");
 
             string content = await response.Content.ReadAsStringAsync();
 
