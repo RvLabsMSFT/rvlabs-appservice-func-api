@@ -3,7 +3,22 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  coreapi: {
+    endpoint: 'https://rvlabs-api-gateway.azurewebsites.net/',
+    api: {
+      top10: 'api/movies/top10',
+      categories: 'api/movies/categories',
+      all: 'api/movies/all',
+      func: 'api/func'
+    }
+  },
+  funcapi: {
+    endpoint: 'https://rvlabs-api.azurewebsites.net/',
+    api: {
+      categories: 'api/movies/categories'
+    }
+  }
 };
 
 /*

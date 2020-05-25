@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace coreapi.Controllers
 {
@@ -13,11 +15,23 @@ namespace coreapi.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly ILogger<MoviesController> _logger;
+        private readonly IConfiguration _config;
 
-        public MoviesController(ILogger<MoviesController> logger)
+        public MoviesController(ILogger<MoviesController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _config = configuration;
+
+            FUNC_KEY = _config["SUBSCRIPTION_KEY"];
         }
+
+        private static string FUNC_ENDPOINT = "https://rvlabs-api.azurewebsites.net/"; //Environment.GetEnvironmentVariable("CATEGORIES_ENDPOINT");
+        private static string FUNC_KEY;
+
+        private static readonly HttpClient httpClient = new HttpClient()
+        {
+            BaseAddress = new Uri(FUNC_ENDPOINT)
+        };
 
         public List<MovieItem> ReadMoviesDataSet()
         {
@@ -57,6 +71,21 @@ namespace coreapi.Controllers
             var data = ReadMoviesDataSet();
 
             return new OkObjectResult(data);
+        }
+
+        [HttpGet("/api/func")]
+        public async Task<IActionResult> GetCategories()
+        {
+            httpClient.DefaultRequestHeaders.Add("x-functions-key", FUNC_KEY);
+            HttpResponseMessage response = await httpClient.GetAsync("api/movies/categories");
+
+            string content = await response.Content.ReadAsStringAsync();
+
+            string responseMessage = string.IsNullOrEmpty(content)
+                ? $"********** Request to {FUNC_ENDPOINT} failed ********** "
+                : content;
+
+            return new OkObjectResult(responseMessage);
         }
     }
 }
