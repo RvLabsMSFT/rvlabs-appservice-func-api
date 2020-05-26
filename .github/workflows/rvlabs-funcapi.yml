@@ -1,4 +1,4 @@
-name: RvLabs-Echo-Function
+name: RvLabs-FuncApi
 
 on:
   push:
