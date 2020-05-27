@@ -7,7 +7,7 @@ import { CoreapiComponent } from 'src/app/coreapi/coreapi.component';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit{
-  title = 'web-portal';
+  title = 'CoreAPI Sample';
 
   constructor( private CoreApi: CoreapiComponent ){}
 
