@@ -5,12 +5,12 @@ name: RvLabs-Portal
 on:
   push:
     paths: 
-      - 'rvlabs-portal/**'
+      - 'web-portal/**'
 
 env:
-  AZURE_WEBAPP_NAME: rvlabs-portal    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: 'rvlabs-portal/dist/rvlabs-portal'      # set this to the path to your web app project, defaults to the repository root
-  WEBAPP_PATH: 'rvlabs-portal'
+  AZURE_WEBAPP_NAME: web-portal    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'web-portal/dist/web-portal'      # set this to the path to your web app project, defaults to the repository root
+  WEBAPP_PATH: 'web-portal'
   NODE_VERSION: '12.13.0'                # set this to the node version to use
 
 jobs:
@@ -38,5 +38,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.RVLABS_PORTAL_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.RVLABS_FRONTEND }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
