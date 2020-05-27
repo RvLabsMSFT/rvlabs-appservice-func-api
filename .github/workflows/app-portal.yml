@@ -8,7 +8,7 @@ on:
       - 'web-portal/**'
 
 env:
-  AZURE_WEBAPP_NAME: web-portal    # set this to your application's name
+  AZURE_WEBAPP_NAME: rvlabs-frontend    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: 'web-portal/dist/web-portal'      # set this to the path to your web app project, defaults to the repository root
   WEBAPP_PATH: 'web-portal'
   NODE_VERSION: '12.13.0'                # set this to the node version to use
