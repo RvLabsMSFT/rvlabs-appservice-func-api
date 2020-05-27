@@ -15,7 +15,7 @@ namespace funcapi
     {
         [FunctionName("Movies")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "movies/categories")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "movies/categories")] HttpRequest req,
             ILogger log)
         {
             var categoryList = JsonConvert.SerializeObject(Categories);
