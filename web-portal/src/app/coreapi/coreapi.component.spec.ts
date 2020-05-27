@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EzauthEchoApiComponent } from './ezauth-echo-api.component';
+import { CoreapiComponent } from './coreapi.component';
 
-describe('EzauthEchoApiComponent', () => {
-  let component: EzauthEchoApiComponent;
-  let fixture: ComponentFixture<EzauthEchoApiComponent>;
+describe('CoreapiComponent', () => {
+  let component: CoreapiComponent;
+  let fixture: ComponentFixture<CoreapiComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EzauthEchoApiComponent ]
+      declarations: [ CoreapiComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EzauthEchoApiComponent);
+    fixture = TestBed.createComponent(CoreapiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

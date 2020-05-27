@@ -347,35 +347,34 @@
   <input type="hidden" #selection>
 
   <div class="card-container">
-    <div class="card card-small" routerLink="/ezauth-func" tabindex="0">
+    <div class="card card-small" (click)="SelectApiOperation('TopTen')" tabindex="0">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>Azure Function: EasyAuth</span>
+      <span>Top Ten</span>
     </div>
 
-    <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+    <div class="card card-small" (click)="SelectApiOperation('All')" tabindex="0">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>Angular Material</span>
+      <span>All</span>
     </div>
 
-    <div class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
+    <div class="card card-small" (click)="SelectApiOperation('Func')" tabindex="0">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>Add PWA Support</span>
+      <span>Func</span>
     </div>
 
     <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-      <span>Add Dependency</span>
+      <span>TBD</span>
     </div>
   </div>
 
   <!-- Terminal -->
   <div class="terminal" >
       <pre>
-        <router-outlet></router-outlet>
       </pre>
   </div>
 
@@ -403,3 +402,4 @@
 
 
 
+<router-outlet></router-outlet>

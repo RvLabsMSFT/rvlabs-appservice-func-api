@@ -2,7 +2,8 @@
 <div *ngIf="data$ | async as response">
     <p>URL: {{response.url}}</p>
     <p>Status: {{response.status}} - {{response.statusText}}</p>
-    <p>First Name: {{response.body.firstName}}</p>
-    <p>Email: {{response.body.email}}</p>
-    <p>Pic: {{response.body.pic}}</p>
+    <p>Data: {{response.body.length}}</p>
+    <div *ngFor="let item of response.body">
+        <li>{{item.title}}</li>
+    </div>
 </div>
